@@ -1,0 +1,29 @@
+{
+  "name": "testproject",
+  "version": "1.0.0",
+  "description": "This is maxwin testproject.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --devtool eval --progress --colors",
+    "deploy": "NODE_ENV=production webpack -p"
+  },
+  "keywords": [
+    "nodejs",
+    "npm",
+    "expressjs",
+    "webpack",
+    "commonjs"
+  ],
+  "author": "JKao",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "json-loader": "^0.5.4",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0"
+  }
+}
