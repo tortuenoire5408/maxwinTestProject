@@ -9,11 +9,10 @@ module.exports = {
     loaders: 
         [
             { test: /\.css$/, loader: "style-loader!css-loader" },
-            { test: /\.json/, loader: "json-loader" }
+            { test: /\.json$/, loader: "json-loader" }
         ]
   },
    resolve: {
     extensions: ['', '.js', '.css', '.json']
   }
-
 };

@@ -68,12 +68,6 @@
 	document.write(
 	    '<div id="clock" width="300" height="30"></div>'
 	    );
-
-	$(document).ready(
-	    function task(){
-	    //  getData2JS();
-	    }
-	);
 	setInterval(function(){
 	    $("#clock").text(
 	        getClockJS.getClock()
