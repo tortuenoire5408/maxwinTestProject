@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var host = process.env.IP;
-var port = process.env.PORT;
+var port = 8080;
 
 app.use(express.static(__dirname + '/app'));
 app.use(function(req, res) {

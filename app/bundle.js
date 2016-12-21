@@ -59,6 +59,7 @@
 	var getDataJS = __webpack_require__(7);
 	var getData2JS = __webpack_require__(9);
 
+
 	document.write(
 	    '<marquee id="txt" width="300" height="30" scrollamount="0" loop="-1">&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp</marquee>'
 	    );
@@ -69,8 +70,9 @@
 	    '<div id="clock" width="300" height="30"></div>'
 	    );
 	setInterval(function(){
+	    var time = new Date();
 	    $("#clock").text(
-	        getClockJS.getClock()
+	        getClockJS.getTime(time)
 	        );
 	    }
 	    , 1000);
@@ -438,15 +440,45 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = {
-	    getClock: function (){
-	        var time = new Date();
-	        var year = time.getFullYear();
-	        var month = ""+(time.getMonth()+1);
-	        var date = ""+time.getDate();
-	        var hours = ""+time.getHours();
-	        var minutes = ""+time.getMinutes();
-	        var Seconds = ""+time.getSeconds();
+	    var year;
+	    var month;
+	    var date;
+	    var hours;
+	    var minutes;
+	    var Seconds;
+	    
+	function getClock(){
+	    this.getYear = function(time){
+	        year = time.getFullYear();
+	        return year;
+	    }
+	    this.getMonth = function(time){
+	        month = (time.getMonth()+1);
+	        return month;
+	    }
+	    this.getDate = function(time){
+	        date = time.getDate();
+	        return date;
+	    }
+	    this.getHours = function(time){
+	        hours = time.getHours();
+	        return hours;
+	    }
+	    this.getMinutes = function(time){
+	        minutes = time.getMinutes();
+	        return minutes;
+	    }
+	    this.getSeconds = function(time){
+	        Seconds = time.getSeconds();
+	        return Seconds;
+	    }
+	    this.getTime = function(time){
+	        year = time.getFullYear();
+	        month = (time.getMonth()+1);
+	        date = time.getDate();
+	        hours = time.getHours();
+	        minutes = time.getMinutes();
+	        Seconds = time.getSeconds();
 	        if(month.length<2) month = "0"+month;
 	        if(date.length<2) date = "0"+date;
 	        if(hours.length<2) hours = "0"+hours;
@@ -455,41 +487,119 @@
 	        var timeFormat = year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+Seconds;
 	        return timeFormat;
 	    }
-	};
+	}
+
+	module.exports = new getClock(); 
+
+
+
+	// module.exports = {
+	//     getYear : function(time){
+	//         year = time.getFullYear();
+	//         return year;
+	//     },
+	//     getMonth : function(time){
+	//         month = (time.getMonth()+1);
+	//         return month;
+	//     },
+	//     getDate : function(time){
+	//         date = time.getDate();
+	//         return date;
+	//     },
+	//     getHours : function(time){
+	//         hours = time.getHours();
+	//         return hours;
+	//     },
+	//     getMinutes : function(time){
+	//         minutes = time.getMinutes();
+	//         return minutes;
+	//     },
+	//     getSeconds : function(time){
+	//         Seconds = time.getSeconds();
+	//         return Seconds;
+	//     },
+	//     getTime : function(time){
+	//         year = time.getFullYear();
+	//         month = (time.getMonth()+1);
+	//         date = time.getDate();
+	//         hours = time.getHours();
+	//         minutes = time.getMinutes();
+	//         Seconds = time.getSeconds();
+	//         if(month.length<2) month = "0"+month;
+	//         if(date.length<2) date = "0"+date;
+	//         if(hours.length<2) hours = "0"+hours;
+	//         if(minutes.length<2) minutes = "0"+minutes;
+	//         if(Seconds.length<2) Seconds = "0"+Seconds;
+	//         var timeFormat = year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+Seconds;
+	//         return timeFormat;
+	//     }
+	// };
 
 /***/ },
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// var number;
+	// var striArray = require('./data');
+
+	// var getDataJS = module.exports = {
+	//   getJSON : function(){
+	//     $.each(striArray, function(key, val){   
+	//             console.log(val.string);
+	//         });
+	//   },
+	//   getDataMoveIn : function(){
+	//     number = Math.floor(Math.random()*striArray.length);
+	//     $("#marqueeText").text(striArray[number].string);
+	//     $("#marqueeText").css("visibility","visible");
+	//     $("#marqueeText").css("top","5");
+	//     setTimeout(function(){
+	//         getDataJS.getDataMoveOut()
+	//     }, 3500);
+	//   },
+	//   getDataMoveOut : function(){
+	//     $("#marqueeText").css("visibility","hidden");
+	//     $("#marqueeText").css("top","30");
+	//     setTimeout(function(){
+	//         getDataJS.reset()
+	//     }, 500);
+	//   },
+	//   reset : function(){
+	//     $("#marqueeText").css("top","-20");
+	//   },
+	// };
+
 	var number;
 	var striArray = __webpack_require__(8);
 
-	var getDataJS = module.exports = {
-	  getJSON : function(){
+	function getData(){
+	  this.getJSON = function(){
 	    $.each(striArray, function(key, val){   
 	            console.log(val.string);
 	        });
 	  },
-	  getDataMoveIn : function(){
+	  this.getDataMoveIn = function(){
 	    number = Math.floor(Math.random()*striArray.length);
 	    $("#marqueeText").text(striArray[number].string);
 	    $("#marqueeText").css("visibility","visible");
 	    $("#marqueeText").css("top","5");
 	    setTimeout(function(){
-	        getDataJS.getDataMoveOut()
+	        getDataMoveOut()
 	    }, 3500);
 	  },
-	  getDataMoveOut : function(){
+	  getDataMoveOut = function(){
 	    $("#marqueeText").css("visibility","hidden");
 	    $("#marqueeText").css("top","30");
 	    setTimeout(function(){
-	        getDataJS.reset()
+	        reset()
 	    }, 500);
 	  },
-	  reset : function(){
+	  reset = function(){
 	    $("#marqueeText").css("top","-20");
-	  },
+	  }
 	};
+
+	module.exports = new getData();
 
 /***/ },
 /* 8 */

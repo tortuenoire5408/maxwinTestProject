@@ -3,6 +3,7 @@ var getClockJS = require('./getClock');
 var getDataJS = require('./getData');
 var getData2JS = require('./getData2');
 
+
 document.write(
     '<marquee id="txt" width="300" height="30" scrollamount="0" loop="-1">&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp&emsp</marquee>'
     );
@@ -13,8 +14,9 @@ document.write(
     '<div id="clock" width="300" height="30"></div>'
     );
 setInterval(function(){
+    var time = new Date();
     $("#clock").text(
-        getClockJS.getClock()
+        getClockJS.getTime(time)
         );
     }
     , 1000);

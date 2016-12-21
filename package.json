@@ -21,8 +21,12 @@
     "express": "^4.14.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
     "css-loader": "^0.26.1",
+    "jsdom": "^9.9.1",
     "json-loader": "^0.5.4",
+    "mocha": "^3.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   }
