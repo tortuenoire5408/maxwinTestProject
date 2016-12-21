@@ -1,6 +1,7 @@
 require("./project");
 var getClockJS = require('./getClock');
 var getDataJS = require('./getData');
+var striArray = require('./data');
 var getData2JS = require('./getData2');
 
 
@@ -20,10 +21,14 @@ setInterval(function(){
         );
     }
     , 1000);
-getDataJS.getJSON();
-getDataJS.getDataMoveIn();
+
+$.each(striArray, function(key, val){
+                getDataJS.getJSON(striArray, key);
+            });
+            
+getDataJS.getDataMoveIn(striArray);
 setInterval(function(){
-   getDataJS.getDataMoveIn();
+   getDataJS.getDataMoveIn(striArray);
     }, 5000);
 getData2JS.getJSON();
 getData2JS.delayTime();

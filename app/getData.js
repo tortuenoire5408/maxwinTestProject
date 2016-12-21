@@ -33,6 +33,7 @@ var number;
 
 function getData(){
   this.getJSON = function(striArray, index){
+    console.log(striArray[index].string);
     return striArray[index].string;
   },
   this.getDataMoveIn = function(striArray){
@@ -41,7 +42,9 @@ function getData(){
     $("#marqueeText").css("visibility","visible");
     $("#marqueeText").css("top","5");
     console.log($("#marqueeText").css("top"));
-    // return $("#marqueeText").css("visibility");
+    //return $("#marqueeText").css("visibility");
+    return [striArray.length, striArray[number].string, number, $("#marqueeText").text(), $("#marqueeText").css("visibility"), $("#marqueeText").top];
+    // $("#marqueeText").css("visibility"), $("#marqueeText").css("top")
     setTimeout(function(){
         getDataMoveOut()
     }, 3500);

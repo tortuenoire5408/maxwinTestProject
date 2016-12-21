@@ -57,6 +57,7 @@
 	__webpack_require__(2);
 	var getClockJS = __webpack_require__(6);
 	var getDataJS = __webpack_require__(7);
+	var striArray = __webpack_require__(8);
 	var getData2JS = __webpack_require__(9);
 
 
@@ -76,10 +77,14 @@
 	        );
 	    }
 	    , 1000);
-	getDataJS.getJSON();
-	getDataJS.getDataMoveIn();
+
+	$.each(striArray, function(key, val){
+	                getDataJS.getJSON(striArray, key);
+	            });
+	            
+	getDataJS.getDataMoveIn(striArray);
 	setInterval(function(){
-	   getDataJS.getDataMoveIn();
+	   getDataJS.getDataMoveIn(striArray);
 	    }, 5000);
 	getData2JS.getJSON();
 	getData2JS.delayTime();
@@ -537,7 +542,7 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// var number;
 	// var striArray = require('./data');
@@ -570,19 +575,22 @@
 	// };
 
 	var number;
-	var striArray = __webpack_require__(8);
+	// var striArray = require('./data');
 
 	function getData(){
-	  this.getJSON = function(){
-	    $.each(striArray, function(key, val){   
-	            console.log(val.string);
-	        });
+	  this.getJSON = function(striArray, index){
+	    console.log(striArray[index].string);
+	    return striArray[index].string;
 	  },
-	  this.getDataMoveIn = function(){
+	  this.getDataMoveIn = function(striArray){
 	    number = Math.floor(Math.random()*striArray.length);
 	    $("#marqueeText").text(striArray[number].string);
 	    $("#marqueeText").css("visibility","visible");
 	    $("#marqueeText").css("top","5");
+	    console.log($("#marqueeText").css("visibility"));
+	    //return $("#marqueeText").css("visibility");
+	    return [striArray.length, striArray[number].string, number];
+	    // $("#marqueeText").css("visibility"), $("#marqueeText").css("top")
 	    setTimeout(function(){
 	        getDataMoveOut()
 	    }, 3500);
