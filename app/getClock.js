@@ -1,10 +1,3 @@
-    var year;
-    var month;
-    var date;
-    var hours;
-    var minutes;
-    var Seconds;
-    
 function getClock(){
     this.getYear = function(time){
         year = time.getFullYear();
@@ -31,12 +24,12 @@ function getClock(){
         return Seconds;
     }
     this.getTime = function(time){
-        year = time.getFullYear();
-        month = (time.getMonth()+1);
-        date = time.getDate();
-        hours = time.getHours();
-        minutes = time.getMinutes();
-        Seconds = time.getSeconds();
+        year = this.getYear(time);
+        month = (this.getMonth(time)+1);
+        date = this.getDate(time);
+        hours = this.getHours(time);
+        minutes = this.getMinutes(time);
+        Seconds = this.getSeconds(time);
         if(month.length<2) month = "0"+month;
         if(date.length<2) date = "0"+date;
         if(hours.length<2) hours = "0"+hours;

@@ -3,6 +3,7 @@ var getClockJS = require('./getClock');
 var getDataJS = require('./getData');
 var striArray = require('./data');
 var getData2JS = require('./getData2');
+var stringArray = require('../data2');
 
 
 document.write(
@@ -30,6 +31,11 @@ getDataJS.getDataMoveIn(striArray);
 setInterval(function(){
    getDataJS.getDataMoveIn(striArray);
     }, 5000);
+
+$.each(stringArray, function(key, val){
+                getData2JS.getJSON(stringArray, key);
+            });
+
 getData2JS.getJSON();
 getData2JS.delayTime();
 setInterval(function(){
