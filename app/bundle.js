@@ -56,7 +56,7 @@
 	__webpack_require__(2);
 	var getClockJS = __webpack_require__(6);
 	var getDataJS = __webpack_require__(7);
-	// var striArray = require('./data');
+	var striArray = __webpack_require__(8);
 	var stringArray = __webpack_require__(9);
 
 
@@ -81,13 +81,9 @@
 
 
 	//getData2
-	$.each(stringArray, function(key, val){
-	                console.log(getDataJS.getJSON(stringArray, key));
-	            });
-
 	delayTime();
 	setInterval(function(){
-	   delayTime();
+	  delayTime();
 	    }, 18000);
 
 
@@ -102,8 +98,10 @@
 	  }
 
 	function getDataRestart(){
-	    num = Math.floor(Math.random()*stringArray.length);
-	    $("#txt").text(stringArray[num].string);
+	    var stringArrayLength = getDataJS.getJsonLength(stringArray);
+	    var num = Math.floor(Math.random()*stringArrayLength);
+	    var data = getDataJS.getJSON(stringArray, num);
+	    $("#txt").text(data);
 	    $("#txt").attr('scrollamount','5');
 	    document.getElementById('txt').start();
 	    $("#txt").prop('loop','-1');
@@ -119,10 +117,6 @@
 	  }  
 
 	//getData  
-	// $.each(striArray, function(key, val){
-	//                 console.log(getDataJS.getJSON(striArray, key));
-	//             });
-	            
 	getDataMoveIn();
 	setInterval(function(){
 	   getDataMoveIn();
@@ -130,9 +124,9 @@
 
 
 	function getDataMoveIn(){
-	    striArrayLength = getDataJS.getJsonLength();
-	    number = Math.floor(Math.random()*striArrayLength);
-	    data = getDataJS.getJSON(number)
+	    var striArrayLength = getDataJS.getJsonLength(striArray);
+	    var number = Math.floor(Math.random()*striArrayLength);
+	    var data = getDataJS.getJSON(striArray, number)
 	    $("#marqueeText").text(data);
 	    $("#marqueeText").css("visibility","visible");
 	    $("#marqueeText").css("top","5");
@@ -549,76 +543,22 @@
 
 	module.exports = new getClock(); 
 
-
-
-	// module.exports = {
-	//     getYear : function(time){
-	//         year = time.getFullYear();
-	//         return year;
-	//     },
-	//     getMonth : function(time){
-	//         month = (time.getMonth()+1);
-	//         return month;
-	//     },
-	//     getDate : function(time){
-	//         date = time.getDate();
-	//         return date;
-	//     },
-	//     getHours : function(time){
-	//         hours = time.getHours();
-	//         return hours;
-	//     },
-	//     getMinutes : function(time){
-	//         minutes = time.getMinutes();
-	//         return minutes;
-	//     },
-	//     getSeconds : function(time){
-	//         Seconds = time.getSeconds();
-	//         return Seconds;
-	//     },
-	//     getTime : function(time){
-	//         year = time.getFullYear();
-	//         month = (time.getMonth()+1);
-	//         date = time.getDate();
-	//         hours = time.getHours();
-	//         minutes = time.getMinutes();
-	//         Seconds = time.getSeconds();
-	//         if(month.length<2) month = "0"+month;
-	//         if(date.length<2) date = "0"+date;
-	//         if(hours.length<2) hours = "0"+hours;
-	//         if(minutes.length<2) minutes = "0"+minutes;
-	//         if(Seconds.length<2) Seconds = "0"+Seconds;
-	//         var timeFormat = year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+Seconds;
-	//         return timeFormat;
-	//     }
-	// };
-
 /***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	function getData(){
-	  this.getJsonLength = function(){
-	    var striArray = __webpack_require__(8);
-	    // console.log(striArray[index].string);
-	    return striArray.length;
-	  }
-	  this.getJSON = function(index){
-	    var striArray = __webpack_require__(8);
-	    console.log(striArray[index].string);
-	    // return striArray[index].string;
-	  }
+	module.exports = {
+	    getJsonLength : function(JSONArray){
+	        var stringArray = JSONArray;
+	        console.log(stringArray.length);
+	        return stringArray.length;
+	    },
+	    getJSON : function(JSONArray, index){ 
+	        var stringArray = JSONArray;
+	        console.log(stringArray[index].string);
+	        return stringArray[index].string;
+	    }
 	};
-
-	module.exports = new getData();
-
-
-	// module.exports = {
-	//   getJSON : function(stringArray, index){ 
-	//             // console.log(stringArray[index].string);
-	//             return stringArray[index].string;
-	//   }
-	// };ß
 
 /***/ },
 /* 8 */

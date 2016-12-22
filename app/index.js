@@ -1,7 +1,7 @@
 require("./project");
 var getClockJS = require('./getClock');
 var getDataJS = require('./getData');
-// var striArray = require('./data');
+var striArray = require('./data');
 var stringArray = require('./data2');
 
 
@@ -26,13 +26,9 @@ setInterval(function(){
 
 
 //getData2
-$.each(stringArray, function(key, val){
-                console.log(getDataJS.getJSON(stringArray, key));
-            });
-
 delayTime();
 setInterval(function(){
-   delayTime();
+  delayTime();
     }, 18000);
 
 
@@ -47,8 +43,10 @@ function delayTime(){
   }
 
 function getDataRestart(){
-    num = Math.floor(Math.random()*stringArray.length);
-    $("#txt").text(stringArray[num].string);
+    var stringArrayLength = getDataJS.getJsonLength(stringArray);
+    var num = Math.floor(Math.random()*stringArrayLength);
+    var data = getDataJS.getJSON(stringArray, num);
+    $("#txt").text(data);
     $("#txt").attr('scrollamount','5');
     document.getElementById('txt').start();
     $("#txt").prop('loop','-1');
@@ -64,10 +62,6 @@ function changeLoop(){
   }  
 
 //getData  
-// $.each(striArray, function(key, val){
-//                 console.log(getDataJS.getJSON(striArray, key));
-//             });
-            
 getDataMoveIn();
 setInterval(function(){
    getDataMoveIn();
@@ -75,9 +69,9 @@ setInterval(function(){
 
 
 function getDataMoveIn(){
-    striArrayLength = getDataJS.getJsonLength();
-    number = Math.floor(Math.random()*striArrayLength);
-    data = getDataJS.getJSON(number)
+    var striArrayLength = getDataJS.getJsonLength(striArray);
+    var number = Math.floor(Math.random()*striArrayLength);
+    var data = getDataJS.getJSON(striArray, number)
     $("#marqueeText").text(data);
     $("#marqueeText").css("visibility","visible");
     $("#marqueeText").css("top","5");
