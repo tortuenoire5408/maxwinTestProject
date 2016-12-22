@@ -25,7 +25,7 @@ describe('取得跑馬燈测试', function() {
     // }
 
     describe('取得字串', function() {
-        it('isEqual', function() {
+        it('getData.getJSON(striArray, key) isEqual val.string', function() {
             $.each(striArray, function(key, val){
                 expect(getData.getJSON(striArray, key)).to.be.equal(val.string);
             });
@@ -34,20 +34,36 @@ describe('取得跑馬燈测试', function() {
 
     describe('進入畫面之前', function() {
         var getArray = getData.getDataMoveIn(striArray);
-        it('isEqual', function() {
+        it('striArray.length isEqual 10', function() {
             expect(getArray[0]).to.be.equal(10);
         });
-        it('isEqual', function() {
+        it('striArray[number].string isEqual striArray[getArray[2]].string', function() {
             expect(getArray[1]).to.be.equal(striArray[getArray[2]].string);
         });
-        it('isEqual', function() {
+        it('$("#marqueeText").text() isEqual striArray[getArray[2]].string', function() {
             expect(getArray[3]).to.be.equal(striArray[getArray[2]].string);
         });
-        it('isEqual', function() {
+        it('$("#marqueeText").css("visibility") isEqual visible', function() {
             expect(getArray[4]).to.be.equal('visible');
         });
-        it('isEqual', function() {
+        it('$("#marqueeText").css("top") isEqual 5px', function() {
             expect(getArray[5]).to.be.equal('5px');
         });
     });
+
+    describe('跑出畫面', function(){
+        var getArray2 = getDataMoveOut();
+        it('$("#marqueeText").css("visibility") isEqual hidden', function(){
+            expect(getArray2[0]).to.be.equal('hidden');
+        });
+        it('$("#marqueeText").css("top") isEqual 30px', function(){
+            expect(getArray2[1]).to.be.equal('30px');
+        });
+    });
+
+    describe('位置重置', function(){
+        it('$("#marqueeText").css("top") isEqual -20px', function(){
+            expect(reset()).to.be.equal('-20px');
+        });
+    });   
 });

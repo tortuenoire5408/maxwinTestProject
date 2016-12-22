@@ -42,21 +42,23 @@ function getData(){
     $("#marqueeText").css("visibility","visible");
     $("#marqueeText").css("top","5px");
     // $("#marqueeText").css("width","200px");
-    console.log($("#marqueeText").css("top"));
+    // console.log($("#marqueeText").css("top"));
     return [striArray.length, striArray[number].string, number, $("#marqueeText").text(), $("#marqueeText").css("visibility"), $("#marqueeText").css("top")];
-    setTimeout(function(){
-        getDataMoveOut()
-    }, 3500);
+    // setTimeout(function(){
+    //     getDataMoveOut()
+    // }, 3500);
   },
   getDataMoveOut = function(){
     $("#marqueeText").css("visibility","hidden");
-    $("#marqueeText").css("top","30");
-    setTimeout(function(){
-        reset()
-    }, 500);
+    $("#marqueeText").css("top","30px");
+    return [$("#marqueeText").css("visibility"), $("#marqueeText").css("top")];
+    // setTimeout(function(){
+    //     reset()
+    // }, 500);
   },
   reset = function(){
-    $("#marqueeText").css("top","-20");
+    $("#marqueeText").css("top","-20px");
+    return $("#marqueeText").css("top");
   }
 };
 
