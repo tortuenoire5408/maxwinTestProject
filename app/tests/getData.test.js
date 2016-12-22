@@ -2,18 +2,27 @@ var getData = require('../getData');
 var striArray = require('../data');
 var expect = require('chai').expect;
 var jsdom = require('jsdom');
+// var cssPath = '../project.css';
 
 
 describe('取得跑馬燈测试', function() {
 
     ///$ is undefined || window is undefine
-    var doc = jsdom.jsdom('<html><body></body></html>');
-    var window = doc.defaultView;
+    var document = jsdom.jsdom('<html><head></head><body></body></html>');
+    var window = document.defaultView;
     global.window = window
     global.$ = global.jQuery = require('../jquery');
-    doc.write(
-    '<script>require("../project");</script><div id="marquee"><div id="marqueeText">Rolling Clouds</div></div>'
+    document.write(
+    '<div id="marquee"><div id="marqueeText">Rolling Clouds</div></div>'
     );
+    // addCss(cssPath);
+    // function addCss(cssPath){
+    // var newCss=document.createElement("link");
+    // newCss.setAttribute("rel", "stylesheet");
+    // newCss.setAttribute("type", "text/css");
+    // newCss.setAttribute("href", cssPath);
+    // document.getElementsByTagName("head")[0].appendChild(newCss);
+    // }
 
     describe('取得字串', function() {
         it('isEqual', function() {

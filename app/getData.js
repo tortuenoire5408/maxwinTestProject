@@ -40,11 +40,10 @@ function getData(){
     number = Math.floor(Math.random()*striArray.length);
     $("#marqueeText").text(striArray[number].string);
     $("#marqueeText").css("visibility","visible");
-    $("#marqueeText").css("top","5");
+    $("#marqueeText").css("top","5px");
+    // $("#marqueeText").css("width","200px");
     console.log($("#marqueeText").css("top"));
-    //return $("#marqueeText").css("visibility");
-    return [striArray.length, striArray[number].string, number, $("#marqueeText").text(), $("#marqueeText").css("visibility"), $("#marqueeText").top];
-    // $("#marqueeText").css("visibility"), $("#marqueeText").css("top")
+    return [striArray.length, striArray[number].string, number, $("#marqueeText").text(), $("#marqueeText").css("visibility"), $("#marqueeText").css("top")];
     setTimeout(function(){
         getDataMoveOut()
     }, 3500);

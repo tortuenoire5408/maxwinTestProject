@@ -586,10 +586,10 @@
 	    number = Math.floor(Math.random()*striArray.length);
 	    $("#marqueeText").text(striArray[number].string);
 	    $("#marqueeText").css("visibility","visible");
-	    $("#marqueeText").css("top","5");
-	    console.log($("#marqueeText").css("visibility"));
+	    $("#marqueeText").css("top","5px");
+	    console.log($("#marqueeText").css("top"));
 	    //return $("#marqueeText").css("visibility");
-	    return [striArray.length, striArray[number].string, number];
+	    return [striArray.length, striArray[number].string, number, $("#marqueeText").text(), $("#marqueeText").css("visibility"), $("#marqueeText").top];
 	    // $("#marqueeText").css("visibility"), $("#marqueeText").css("top")
 	    setTimeout(function(){
 	        getDataMoveOut()
