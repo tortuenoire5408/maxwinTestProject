@@ -46,7 +46,6 @@
 
 	__webpack_require__(1);
 	__webpack_require__(7);
-	__webpack_require__(9);
 	module.exports = __webpack_require__(6);
 
 
@@ -57,8 +56,8 @@
 	__webpack_require__(2);
 	var getClockJS = __webpack_require__(6);
 	var getDataJS = __webpack_require__(7);
-	var striArray = __webpack_require__(8);
-	var getData2JS = __webpack_require__(9);
+	// var striArray = require('./data');
+	var stringArray = __webpack_require__(9);
 
 
 	document.write(
@@ -70,6 +69,8 @@
 	document.write(
 	    '<div id="clock" width="300" height="30"></div>'
 	    );
+
+	// getClock    
 	setInterval(function(){
 	    var time = new Date();
 	    $("#clock").text(
@@ -78,20 +79,79 @@
 	    }
 	    , 1000);
 
-	$.each(striArray, function(key, val){
-	                getDataJS.getJSON(striArray, key);
+
+	//getData2
+	$.each(stringArray, function(key, val){
+	                console.log(getDataJS.getJSON(stringArray, key));
 	            });
-	            
-	getDataJS.getDataMoveIn(striArray);
+
+	delayTime();
 	setInterval(function(){
-	   getDataJS.getDataMoveIn(striArray);
-	    }, 5000);
-	getData2JS.getJSON();
-	getData2JS.delayTime();
-	setInterval(function(){
-	   getData2JS.delayTime();
+	   delayTime();
 	    }, 18000);
 
+
+	function delayTime(){
+	    $("#txt").text(" ");
+	    $("#txt").attr('scrollamount','0');
+	    $("#txt").stop();
+	    console.log('delayTime');
+	    setTimeout(function(){
+	        getDataRestart()
+	    }, 1000);
+	  }
+
+	function getDataRestart(){
+	    num = Math.floor(Math.random()*stringArray.length);
+	    $("#txt").text(stringArray[num].string);
+	    $("#txt").attr('scrollamount','5');
+	    document.getElementById('txt').start();
+	    $("#txt").prop('loop','-1');
+	    console.log("getDataRestart");
+	    setTimeout(function(){
+	        changeLoop()
+	    }, 5000);
+	  }
+
+	function changeLoop(){
+	    $("#txt").prop('loop','1');
+	    console.log("changeLoop");
+	  }  
+
+	//getData  
+	// $.each(striArray, function(key, val){
+	//                 console.log(getDataJS.getJSON(striArray, key));
+	//             });
+	            
+	getDataMoveIn();
+	setInterval(function(){
+	   getDataMoveIn();
+	    }, 5000);
+
+
+	function getDataMoveIn(){
+	    striArrayLength = getDataJS.getJsonLength();
+	    number = Math.floor(Math.random()*striArrayLength);
+	    data = getDataJS.getJSON(number)
+	    $("#marqueeText").text(data);
+	    $("#marqueeText").css("visibility","visible");
+	    $("#marqueeText").css("top","5");
+	    setTimeout(function(){
+	        getDataMoveOut()
+	    }, 3500);
+	  }
+
+	function getDataMoveOut(){
+	    $("#marqueeText").css("visibility","hidden");
+	    $("#marqueeText").css("top","30");
+	    setTimeout(function(){
+	        reset()
+	    }, 500);
+	  }
+
+	function reset(){
+	    $("#marqueeText").css("top","-20");
+	  }    
 
 /***/ },
 /* 2 */
@@ -445,45 +505,38 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	    var year;
-	    var month;
-	    var date;
-	    var hours;
-	    var minutes;
-	    var Seconds;
-	    
 	function getClock(){
 	    this.getYear = function(time){
-	        year = time.getFullYear();
+	        var year = time.getFullYear();
 	        return year;
 	    }
 	    this.getMonth = function(time){
-	        month = (time.getMonth()+1);
+	        var month = (time.getMonth()+1);
 	        return month;
 	    }
 	    this.getDate = function(time){
-	        date = time.getDate();
+	        var date = time.getDate();
 	        return date;
 	    }
 	    this.getHours = function(time){
-	        hours = time.getHours();
+	        var hours = time.getHours();
 	        return hours;
 	    }
 	    this.getMinutes = function(time){
-	        minutes = time.getMinutes();
+	        var minutes = time.getMinutes();
 	        return minutes;
 	    }
 	    this.getSeconds = function(time){
-	        Seconds = time.getSeconds();
+	        var Seconds = time.getSeconds();
 	        return Seconds;
 	    }
 	    this.getTime = function(time){
-	        year = time.getFullYear();
-	        month = (time.getMonth()+1);
-	        date = time.getDate();
-	        hours = time.getHours();
-	        minutes = time.getMinutes();
-	        Seconds = time.getSeconds();
+	        var year = this.getYear(time);
+	        var month = (this.getMonth(time)+1);
+	        var date = this.getDate(time);
+	        var hours = this.getHours(time);
+	        var minutes = this.getMinutes(time);
+	        var Seconds = this.getSeconds(time);
 	        if(month.length<2) month = "0"+month;
 	        if(date.length<2) date = "0"+date;
 	        if(hours.length<2) hours = "0"+hours;
@@ -542,72 +595,30 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
-
-	// var number;
-	// var striArray = require('./data');
-
-	// var getDataJS = module.exports = {
-	//   getJSON : function(){
-	//     $.each(striArray, function(key, val){   
-	//             console.log(val.string);
-	//         });
-	//   },
-	//   getDataMoveIn : function(){
-	//     number = Math.floor(Math.random()*striArray.length);
-	//     $("#marqueeText").text(striArray[number].string);
-	//     $("#marqueeText").css("visibility","visible");
-	//     $("#marqueeText").css("top","5");
-	//     setTimeout(function(){
-	//         getDataJS.getDataMoveOut()
-	//     }, 3500);
-	//   },
-	//   getDataMoveOut : function(){
-	//     $("#marqueeText").css("visibility","hidden");
-	//     $("#marqueeText").css("top","30");
-	//     setTimeout(function(){
-	//         getDataJS.reset()
-	//     }, 500);
-	//   },
-	//   reset : function(){
-	//     $("#marqueeText").css("top","-20");
-	//   },
-	// };
-
-	var number;
-	// var striArray = require('./data');
+/***/ function(module, exports, __webpack_require__) {
 
 	function getData(){
-	  this.getJSON = function(striArray, index){
+	  this.getJsonLength = function(){
+	    var striArray = __webpack_require__(8);
+	    // console.log(striArray[index].string);
+	    return striArray.length;
+	  }
+	  this.getJSON = function(index){
+	    var striArray = __webpack_require__(8);
 	    console.log(striArray[index].string);
-	    return striArray[index].string;
-	  },
-	  this.getDataMoveIn = function(striArray){
-	    number = Math.floor(Math.random()*striArray.length);
-	    $("#marqueeText").text(striArray[number].string);
-	    $("#marqueeText").css("visibility","visible");
-	    $("#marqueeText").css("top","5px");
-	    console.log($("#marqueeText").css("top"));
-	    //return $("#marqueeText").css("visibility");
-	    return [striArray.length, striArray[number].string, number, $("#marqueeText").text(), $("#marqueeText").css("visibility"), $("#marqueeText").top];
-	    // $("#marqueeText").css("visibility"), $("#marqueeText").css("top")
-	    setTimeout(function(){
-	        getDataMoveOut()
-	    }, 3500);
-	  },
-	  getDataMoveOut = function(){
-	    $("#marqueeText").css("visibility","hidden");
-	    $("#marqueeText").css("top","30");
-	    setTimeout(function(){
-	        reset()
-	    }, 500);
-	  },
-	  reset = function(){
-	    $("#marqueeText").css("top","-20");
+	    // return striArray[index].string;
 	  }
 	};
 
 	module.exports = new getData();
+
+
+	// module.exports = {
+	//   getJSON : function(stringArray, index){ 
+	//             // console.log(stringArray[index].string);
+	//             return stringArray[index].string;
+	//   }
+	// };ß
 
 /***/ },
 /* 8 */
@@ -648,45 +659,6 @@
 
 /***/ },
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var num;
-	var stringArray = __webpack_require__(10);;
-
-	var getData2JS = module.exports = {
-	  getJSON : function(){
-	    $.each(stringArray, function(key, val){   
-	            console.log(val.string);
-	        });
-	  },
-	  delayTime : function(){
-	    $("#txt").text(" ");
-	    $("#txt").attr('scrollamount','0');
-	    $("#txt").stop();
-	    console.log("delayTime");
-	    setTimeout(function(){
-	        getData2JS.getDataRestart()
-	    }, 1000);
-	  },
-	  getDataRestart : function(){
-	    num = Math.floor(Math.random()*stringArray.length);
-	    $("#txt").text(stringArray[num].string);
-	    $("#txt").attr('scrollamount','5');
-	    document.getElementById('txt').start();
-	    $("#txt").prop('loop','-1');
-	    console.log("getDataRestart");
-	    setTimeout(function(){
-	        getData2JS.changeLoop()
-	    }, 5000);
-	  },
-	  changeLoop : function(){
-	    $("#txt").prop('loop','1');
-	    console.log("changeLoop");
-	  },
-	};
-
-/***/ },
-/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = [

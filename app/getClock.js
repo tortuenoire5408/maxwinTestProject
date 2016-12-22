@@ -1,35 +1,35 @@
 function getClock(){
     this.getYear = function(time){
-        year = time.getFullYear();
+        var year = time.getFullYear();
         return year;
     }
     this.getMonth = function(time){
-        month = (time.getMonth()+1);
+        var month = (time.getMonth()+1);
         return month;
     }
     this.getDate = function(time){
-        date = time.getDate();
+        var date = time.getDate();
         return date;
     }
     this.getHours = function(time){
-        hours = time.getHours();
+        var hours = time.getHours();
         return hours;
     }
     this.getMinutes = function(time){
-        minutes = time.getMinutes();
+        var minutes = time.getMinutes();
         return minutes;
     }
     this.getSeconds = function(time){
-        Seconds = time.getSeconds();
+        var Seconds = time.getSeconds();
         return Seconds;
     }
     this.getTime = function(time){
-        year = this.getYear(time);
-        month = (this.getMonth(time)+1);
-        date = this.getDate(time);
-        hours = this.getHours(time);
-        minutes = this.getMinutes(time);
-        Seconds = this.getSeconds(time);
+        var year = this.getYear(time);
+        var month = (this.getMonth(time)+1);
+        var date = this.getDate(time);
+        var hours = this.getHours(time);
+        var minutes = this.getMinutes(time);
+        var Seconds = this.getSeconds(time);
         if(month.length<2) month = "0"+month;
         if(date.length<2) date = "0"+date;
         if(hours.length<2) hours = "0"+hours;

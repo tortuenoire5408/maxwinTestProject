@@ -1,9 +1,8 @@
 require("./project");
 var getClockJS = require('./getClock');
 var getDataJS = require('./getData');
-var striArray = require('./data');
-var getData2JS = require('./getData2');
-var stringArray = require('../data2');
+// var striArray = require('./data');
+var stringArray = require('./data2');
 
 
 document.write(
@@ -15,6 +14,8 @@ document.write(
 document.write(
     '<div id="clock" width="300" height="30"></div>'
     );
+
+// getClock    
 setInterval(function(){
     var time = new Date();
     $("#clock").text(
@@ -23,21 +24,76 @@ setInterval(function(){
     }
     , 1000);
 
-$.each(striArray, function(key, val){
-                getDataJS.getJSON(striArray, key);
+
+//getData2
+$.each(stringArray, function(key, val){
+                console.log(getDataJS.getJSON(stringArray, key));
             });
-            
-getDataJS.getDataMoveIn(striArray);
+
+delayTime();
 setInterval(function(){
-   getDataJS.getDataMoveIn(striArray);
+   delayTime();
+    }, 18000);
+
+
+function delayTime(){
+    $("#txt").text(" ");
+    $("#txt").attr('scrollamount','0');
+    $("#txt").stop();
+    console.log('delayTime');
+    setTimeout(function(){
+        getDataRestart()
+    }, 1000);
+  }
+
+function getDataRestart(){
+    num = Math.floor(Math.random()*stringArray.length);
+    $("#txt").text(stringArray[num].string);
+    $("#txt").attr('scrollamount','5');
+    document.getElementById('txt').start();
+    $("#txt").prop('loop','-1');
+    console.log("getDataRestart");
+    setTimeout(function(){
+        changeLoop()
+    }, 5000);
+  }
+
+function changeLoop(){
+    $("#txt").prop('loop','1');
+    console.log("changeLoop");
+  }  
+
+//getData  
+// $.each(striArray, function(key, val){
+//                 console.log(getDataJS.getJSON(striArray, key));
+//             });
+            
+getDataMoveIn();
+setInterval(function(){
+   getDataMoveIn();
     }, 5000);
 
-$.each(stringArray, function(key, val){
-                getData2JS.getJSON(stringArray, key);
-            });
 
-getData2JS.getJSON();
-getData2JS.delayTime();
-setInterval(function(){
-   getData2JS.delayTime();
-    }, 18000);
+function getDataMoveIn(){
+    striArrayLength = getDataJS.getJsonLength();
+    number = Math.floor(Math.random()*striArrayLength);
+    data = getDataJS.getJSON(number)
+    $("#marqueeText").text(data);
+    $("#marqueeText").css("visibility","visible");
+    $("#marqueeText").css("top","5");
+    setTimeout(function(){
+        getDataMoveOut()
+    }, 3500);
+  }
+
+function getDataMoveOut(){
+    $("#marqueeText").css("visibility","hidden");
+    $("#marqueeText").css("top","30");
+    setTimeout(function(){
+        reset()
+    }, 500);
+  }
+
+function reset(){
+    $("#marqueeText").css("top","-20");
+  }    
